@@ -1,0 +1,25 @@
+multi_area_ccpp_mission_manager:
+  ros__parameters:
+    decomposition_type: 0 # [0: Boustrophedon, 1: Trapezoidal]
+    cost_function_type: 1 # [0: Euclidean Distance, 1: Time, 2: Number of Waypoints]
+    v_max: 0.8 # Only for time optimization.
+    a_max: 0.5 # Only for time optimization.
+    wall_distance: 0.5
+    offset_polygons: false
+    sweep_single_direction: false
+
+    # Sensor model.
+    sensor_model_type: 0 # [0: Line, 1: Frustum]
+    lateral_overlap: 0.1
+    lateral_footprint: 0.50 # Only for line sensor model.
+    lateral_fov: 0.5 # Only for frustum sensor model.
+
+    latch_topics: true
+
+    waypoint_resolution: 0.3
+    altitude: 0.0
+    changeColosCost: 10. # 转弯代价值,代价越大越表示希望机器人沿着每一列完成绕障
+    turn_offset: 0.9 # 弓字形路径转弯处距离设置（相对于boundingbox），防止转弯距离障碍物过小触发绕障
+    obs_offset: 0.3 #x轴距离障碍物为obs_offset的栅格也会置为occ，防止机器人在转弯处和障碍物附近减速避障
+    inflation_dis: 0.5 #距离墙的膨胀距离
+    dis_of_path: 0.4;#路径之间的距离为0.4m

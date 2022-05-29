@@ -1,0 +1,12 @@
+.vscode/settings.json
+navigation/cvte_hd_map/src/log_info/*
+navigation/path_follower/src/state/log_info/*
+navigation/planner_utils/include/log_info/*
+navigation/speed_decision/src/factor/log_info/*
+navigation_ros2/src/log_info/*
+navigation/cvte_hd_map/common/log_info/*
+navigation/path_follower/src/planner_decision/log_info/*
+navigation/cvte_hd_map/log_info/*
+navigation/algorithm_packets/include/pit_planner/log_info/*
+navigation/algorithm_packets/log_info/*
+navigation/path_follower/src/log_info/*

@@ -1,0 +1,19 @@
+dynamic_obstacles_tracking:
+  ros__parameters:
+    print_log: false
+
+    cloud_topic: all_obstacle_points_map
+
+    filter_num: 5
+    threshold_contian_IoU: 0.6
+
+    cluster_radius: 0.35
+    increment_radius: 0.15 #超出一定距离增加聚类半径
+    min_cluster_size: 3
+
+    max_length: 5.0
+    max_width: 5.0
+    max_area: 20.0
+    max_velocity: 10.0
+    min_velocity: 0.15
+    low_obs_height_threshhold: 0.3

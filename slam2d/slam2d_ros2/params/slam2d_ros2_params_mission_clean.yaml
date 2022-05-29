@@ -1,0 +1,233 @@
+slam2d_mission_manager:
+  ros__parameters:
+    ros2_params:
+      laser_tf: [0.484, 0.0, 0.0]
+      map_resolution: 0.05
+      debug_mode: true
+      use_imu: false
+      use_depth_camera: true
+      scan_topic: "/scan"
+      odometry_topic: "/odom"
+      depth_camera_front_up_topic: "/obstacle_cloud_front_up"
+      depth_camera_front_down_topic: "/obstacle_cloud_front_down"
+      step_depth_camera_front_up_topic: "/steps_cloud_front_up"
+      step_depth_camera_front_down_topic: "/steps_cloud_front_down"
+      imu_topic: "/imu"
+      elevator_status_topic: "/navi_manager/lift_area"
+      scan_sampling_ratio: 0.3
+      odometry_sampling_ratio: 0.3
+      imu_sampling_ratio: 1.0
+      localization_pose_topic: fusion_pose_
+      open_sensor_statu_pub: true
+      sensor_statu_pub_delay: 60
+
+    local_trajectory_builder:
+      min_range: 0.05
+      max_range: 19.5
+      voxel_filter_size: 0.05
+      missing_data_ray_length: 1.0
+      use_online_correlative_scan_matching: true
+
+      adaptive_voxel_filter_options:
+        max_range: 30.0
+        max_length: 1.0
+        min_num_points: 100.0
+
+      submaps_options:
+        resolution: 0.05
+        num_range_data: 20 
+        probability_grid_range_data_options:
+          hit_probability: 0.55
+          miss_probability: 0.49
+          insert_free_space: true
+
+      motion_filter_options:
+        max_time_seconds: 5.0
+        max_angle_radians: 0.349  # 20°
+        max_distance_meters: 0.3
+
+      real_time_correlative_scan_matcher:
+        linear_search_window: 0.1
+        angular_search_window: 0.349 # 20°
+        rotation_delta_cost_weight: 1e-1
+        translation_delta_cost_weight: 10.0
+
+      ceres_scan_matcher_options:
+        rotation_weight: 40.0
+        translation_weight: 10.0
+        occupied_space_weight: 1.0
+        ceres_solver_options:
+          num_threads: 1
+          max_num_iterations: 20
+          use_nonmonotonic_steps: false
+      
+    pose_graph_options:
+      global_sampling_ratio: 0.003
+      optimize_every_n_nodes: 20
+      num_background_threads: 4
+      log_residual_histograms: true
+      max_num_final_iterations: 200
+      matcher_rotation_weight: 1.6e3
+      matcher_translation_weight: 5e2
+      global_constraint_search_after_n_seconds: 10.0
+
+      constraint_builder_options:
+        min_score: 0.5
+        log_matches: true
+        sampling_ratio: 0.1
+        max_constraint_distance: 15.0
+        global_localization_min_score: 0.5
+        loop_closure_rotation_weight: 1e5
+        loop_closure_translation_weight: 1.1e4
+        loop_closure_error_ratio: 0.1
+        ceres_scan_matcher:
+          rotation_weight: 1.0
+          translation_weight: 10.0
+          occupied_space_weight: 20.0
+          ceres_solver:
+            num_threads: 1
+            max_num_iterations: 10
+            use_nonmonotonic_steps: true
+        fast_correlative_scan_matcher:
+          linear_search_window: 6.
+          angular_search_window: 0.349  #20°
+          branch_and_bound_depth: 7
+
+      optimization_options:
+        huber_scale: 1e1
+        rotation_weight: 1.6e4
+        acceleration_weight: 1.1e2
+        use_odom: false
+        use_local_pose: true
+        log_solver_summary: false
+        odometry_rotation_weight: 1e5
+        odometry_translation_weight: 1e5
+        local_slam_pose_rotation_weight: 1e5
+        local_slam_pose_translation_weight: 1e5
+        gyro_yaw_rotation_weight: 1e6
+        gyro_yaw_bias_vary_weight: 1e7
+        gyro_yaw_bias_prior: 0.
+        gyro_yaw_bias_prior_weight: 1e7
+        num_node_one_segment: 300
+        ceres_solver:
+          num_threads: 7
+          max_num_iterations: 50
+          use_nonmonotonic_steps: false
+      
+      sampling_ratio_options:
+        scan_sampling_ratio: 0.3
+        odometry_sampling_ratio: 0.3
+        imu_sampling_ratio: 1.0
+
+    loc:
+      use_fast_loo: false
+      use_laserodom_constrain: false
+      init_score_min: 0.35
+      score_min_threshold: 0.15
+      loc_recovery_score_min: 0.25
+      inner_point_dist_threshold: 0.21
+      predict_deque_length: 3.0
+      predict_deque_angle: 3.0
+      predict_to_observe_length_threshold: 0.25
+      predict_to_observe_angle_threshold: 0.15
+      amcl_reinit_pose_score: 0.5
+      odometry_data_cov: 20.0
+      laserodom_data_cov: 5.0
+      init_localizaiton_map_range: 50.0
+      laserodom_correct_threshold: 3.0
+
+    amcl:
+      map_path: "/home/droid/Development/robot_data"
+      max_occ_dist: 0.5
+
+      init_max_samples: 5000
+      init_min_samples: 100
+
+      min_samples: 100
+      max_samples: 1000
+      alpha_slow: 0.0
+      alpha_fast: 0.0
+
+      pop_err: 0.01
+      pop_z: 0.7
+      dist_treshold: 1.0
+
+      alpha1_: 0.2
+      alpha2_: 0.2
+      alpha3_: 0.2
+      alpha4_: 0.2
+      alpha5_: 0.2
+
+      cell_size_x_: 0.5
+      cell_size_y_: 0.5
+      cell_size_yaw_: 0.5
+
+      max_occ_dist_: 0.5
+      do_beamskip_: false
+      beam_skip_distance_: 0.5
+      beam_skip_threshold_: 0.3
+      beam_skip_error_threshold_: 0.9
+
+      z_hit_: 0.5
+      z_rand_: 0.5
+      sigma_hit_: 0.08
+      z_short_: 0.05
+      z_max_: 0.05
+      lambda_short_: 0.1
+      chi_outlier_: 0.0
+
+      max_beams_: 181
+
+      laser_pose_x_: 0.484
+      laser_pose_y_: 0.0
+      laser_pose_yaw_: 0.0
+
+      update_trans_thr_: 0.2
+      update_angle_thr_: 0.1
+      update_trans_unormal_thr_: 0.6
+      update_angle_unormal_thr_: 0.5
+
+      resample_interval_: 1
+    
+    msf:
+      do_node_merge: true
+      fix_first_node: true
+      do_time_synchronization: true
+      do_time_check: false
+      compute_cov: true
+      WINDOW_SIZE: 50
+      bad_match_node_number_: 500
+      
+    gsm:
+      do_global_search: false
+      do_window_search: true
+      num_map_depth : 6
+      min_score : 0.6
+      search_angle_resolution : 0.0174444
+      search_windows_x_width : 5.0
+      search_windows_y_width : 5.0
+      search_windows_angle : 180.0
+
+    occupancy_map:
+      do_calibration: true
+      read_from_params_system: true
+      front_up_transform_name: external_parameter.T_base_camera_front_up
+      front_down_transform_name: external_parameter.T_base_camera_front_down
+      front_up_transform :  [0.0102134, -0.315248, 0.948954, 0.42435, -0.999943, -0.00623769, 0.00868995, 0.0386476, 0.0031798, -0.948989, -0.315294, 0.82303, 0.0, 0.0, 0.0, 1.0]
+      front_down_transform: [-0.018574, 0.0110498, 0.999766, 0.619565, 0.999828, 0.000264998, 0.0185722, -0.0429056, -5.97175e-05, 0.999939, -0.0110528, 0.10, 0.0, 0.0, 0.0, 1.0]
+
+      depth_dist_value: 2.0
+      depth_seg_ratio: 0.7
+
+      search_area_point: [0.05, -0.03, 2.0, -1.0, 0.05, 0.03, 2.0, 1.0]
+      add_bel_value: 0.4
+      reduce_bel_value: 0.18
+      max_bel_value: 2.0
+
+      v_limit: 0.01 #低于此速度才添加障碍物
+      w_limit: 0.01 #低于此速度才添加障碍物
+
+      high_filter_value: 0.03
+
+    
+

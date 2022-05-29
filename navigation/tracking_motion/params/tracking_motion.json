@@ -1,0 +1,50 @@
+{
+    "potential_controller":
+    {
+        "scan_size": 360,
+        "k_attactive": 2.0,
+        "k_repulsive": 0,
+        "k_error_angle": 0.9,
+        "k_error_dist": 0.3,
+        "k_vel": 0.3,
+        "k_d": 1,
+        "slow_dist": 2,
+        "stop_dist": 1.2,
+        "max_vel": 1.5,
+        "max_rot": 0.6,
+        "repulsive_top_right_x": 0.25,
+        "repulsive_top_right_y": -0.45,
+        "repulsive_top_left_x": 0.25,
+        "repulsive_top_left_y": 0.45,
+        "repulsive_down_right_x": -0.75,
+        "repulsive_down_right_y": -0.45,
+        "repulsive_down_left_x": -0.75,
+        "repulsive_down_left_y": 0.45,
+        "footprint_top_right_x": 0.35,
+        "footprint_top_right_y": -0.55,
+        "footprint_top_left_x": 0.35,
+        "footprint_top_left_y": 0.55,
+        "footprint_down_right_x": -0.85,
+        "footprint_down_right_y": -0.55,
+        "footprint_down_left_x": -0.85,
+        "footprint_down_left_y": 0.55,
+        "T_bl": -0.25
+    },
+    "kalmanfilter":
+    {
+        "Q_k": 0.1,
+        "R_k": 5,
+        "covariance": 0.1,
+        "delta_t": 0.1
+    },
+    "laser_object_track":
+    {
+        "region_interest": 20,
+        "grid_resolution": 0.2,
+        "th_grid_het": 0.4,
+        "sensor_height": 0.5,
+        "topic": "/velodyne_points",
+        "model_path": "./install/tracking_motion/model/LSC_1.model",
+        "range_path" : "./install/tracking_motion/model/LSC_1.range"
+    }
+}

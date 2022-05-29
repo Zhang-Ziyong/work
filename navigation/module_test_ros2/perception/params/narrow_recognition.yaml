@@ -1,0 +1,33 @@
+costmap:
+  ros__parameters:
+    debug_mode: false
+
+    rolling_window: false
+    width: 15.0
+    height: 15.0
+    resolution: 0.1
+
+    # pose_topic: amcl_pose
+    pose_topic: fusion_pose
+    use_navigation_localization: true
+    use_navigation_cmd_vel: true
+    reset_costmap_time_threshhold: 40
+
+    update_frequency: 5.0
+    # 在costmap_layer.cpp会读取footprint大小，设置避障区
+    footprint: "[[0.6, 0.35],[-0.2, 0.35],[-0.2, -0.35],[0.6, -0.35] ]"
+    footprint_padding: 0.00
+
+    mark_unknown_space: false #是否使用static_map上的unknown区域，false的话会把unknown区域设成free
+    init_static_map: true
+    map_path: "/home/cn/vscode_ws/src/navigation/module_test_ros2/perception/data/narrow_map/narrow.yaml"
+
+    static_layer:
+      enabled: true
+      inflate_cost: 200
+      lethal_cost_threshold: 100
+
+    inflation_layer:
+      enabled: true
+      cost_scaling_factor: 3.0
+      inflation_radius: 0.8

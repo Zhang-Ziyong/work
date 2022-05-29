@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package slam2d.mapping.proto;
+
+import "proto/grid_map.proto";
+import "proto/transform.proto";
+
+message Submap {
+  Rigid3 local_pose = 1;
+  int32 num_range_data = 2;
+  bool finished = 3;
+  GridMap grid = 4;
+}

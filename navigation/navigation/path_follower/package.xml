@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>path_follower</name>
+  <version>0.0.0</version>
+  <description>The navigation path_follower package.</description>
+  <maintainer email="chenmingjian@cvte.com">chenmingjian</maintainer>
+  <license>TODO</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <build_depend>rclcpp</build_depend>
+  <build_depend>pose2d</build_depend>
+  <build_depend>planner_utils</build_depend>
+  <build_depend>costmap_base</build_depend>
+  <build_depend>data_manager</build_depend>
+  <build_depend>costmap_mediator</build_depend>
+  <build_depend>local_controller</build_depend>
+  <build_depend>local_planner</build_depend>
+  <build_depend>robot_trajectory</build_depend>
+  <build_depend>speed_decision</build_depend>
+  <build_depend>perception</build_depend>
+  <build_depend>pnc_map</build_depend>
+
+  <exec_depend>rclcpp</exec_depend>
+  <exec_depend>pose2d</exec_depend>
+  <exec_depend>planner_utils</exec_depend>
+  <exec_depend>costmap_base</exec_depend>
+  <exec_depend>data_manager</exec_depend>
+  <exec_depend>costmap_mediator</exec_depend>
+  <exec_depend>local_controller</exec_depend>
+  <exec_depend>local_planner</exec_depend>
+  <exec_depend>robot_trajectory</exec_depend>
+  <exec_depend>speed_decision</exec_depend>
+  <exec_depend>perception</exec_depend>
+  <exec_depend>pnc_map</exec_depend> 
+
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package slam2d.mapping.proto;
+
+import "proto/transform.proto";
+import "proto/point_cloud.proto";
+
+// Serialized state of a mapping::TrajectoryNode::Data.
+message TrajectoryNodeData {
+  int64 timestamp = 1;
+  PointCloud point_cloud = 2;
+  Rigid3 local_pose = 3;
+  double move_distance = 4;
+}
+

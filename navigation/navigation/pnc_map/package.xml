@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format2.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="2">
+  <name>pnc_map</name>
+  <version>0.0.0</version>
+  <description>TODO: Package description</description>
+  <maintainer email="linyanlong@cvte.com">linyanlong</maintainer>
+  <license>TODO: License declaration</license>
+
+  <build_depend>rclcpp</build_depend>
+  <build_depend>log</build_depend>
+  <build_depend>cvte_hd_map</build_depend>
+  <build_depend>planner_utils</build_depend>
+  <build_depend>pose2d</build_depend>
+
+  <depend>lanelet2_core</depend>
+  <depend>lanelet2_io</depend>
+  <depend>lanelet2_traffic_rules</depend>
+  <depend>lanelet2_routing</depend>
+  <depend>lanelet2_projection</depend>
+
+  <exec_depend>rclcpp</exec_depend>
+  <exec_depend>log</exec_depend>
+  <exec_depend>cvte_hd_map</exec_depend>
+  <exec_depend>planner_utils</exec_depend>
+  <exec_depend>pose2d</exec_depend>
+
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

@@ -1,0 +1,628 @@
+navigation:
+  ros__parameters:
+    planner_frequency: 5.0
+    controller_frequency: 20.0
+    use_default_path: false
+    debug_mode: true
+    sched_priority: 90
+    default_path_file: "/home/droid/linyufeng/cvt_data/navigation/cvt_path.yaml"
+    pose_topic: "fusion_pose" # 定位的topic名称，仿真也可能为”amcl_pose“
+    control_topic: "/navi_vel" # 发布控制速度的topic名称，仿真时用"cmd_vel", 真实用”navi_vel“
+    robot_tpye: "clean_c5" #  机器人类型安保机器人:"security", 清洁机器人C5:"clean_c5"
+    edge_front_topic: "ir_edge_2"
+    edge_back_topic: "ir_edge_1"
+    is_abs_reach: false
+    use_simulator_env: false
+    edge_dist: -0.45 # 0.35(机器半径) + 0.07
+    pose_offset: 0.2
+    clean_area_enable: true
+
+    range_sensor:
+      # 需要用的时候再打开开关
+      topics: left_tof_sensor right_tof_sensor # sonar_fl sonar_fr sonar_lf sonar_rf sonar_lb sonar_rb sonar_bl sonar_br
+      sonar_fl_sensor_tf: [0.347, 0.150, 0.174]
+      sonar_fr_sensor_tf: [0.347, -0.150, -0.174]
+      sonar_lf_sensor_tf: [0.175, 0.290, 1.510]
+      sonar_rf_sensor_tf: [0.175, -0.290, -1.510]
+      sonar_lb_sensor_tf: [-0.175, 0.294, 1.614]
+      sonar_rb_sensor_tf: [-0.175, -0.294, -1.614]
+      sonar_bl_sensor_tf: [-0.352, 0.150, 3.05]
+      sonar_br_sensor_tf: [-0.352, -0.150, -3.05]
+      left_tof_sensor_sensor_tf: [0.5, 0.35, 0.784]
+      right_tof_sensor_sensor_tf: [0.5, -0.35, -0.784]
+    
+    addition_clean:
+      waypoint_resolution: 0.3
+      changeColosCost: 80.0 # 转弯代价值,代价越大越表示希望机器人沿着每一列完成绕障
+      turn_offset: 0.9      # 弓字形路径转弯处距离设置（相对于boundingbox），防止转弯距离障碍物过小触发绕障
+      obs_offset: 0.4       # x轴距离障碍物为obs_offset的栅格也会置为occ，防止机器人在转弯处和障碍物附近减速避障
+      inflation_dis: 0.6    # 距离墙的膨胀距离
+      dis_of_path: 0.4      # 路径间的间隔0.4m
+
+    speed_decision_base: 
+      T_bl: 0.484           # 激光安装的位置 TODO: 重配置文件读取
+      path_slow_length: 3.0 # 机器减速 3米
+      max_v: 1.0            # 最高运行速度
+      max_w: 1.0            # 最高运行速度
+      min_v: 0.02           # 最低速度
+      min_w: 0.01           # 最低可输出的角速度
+      max_v_inc: 0.3        # 最高加速度
+      max_w_inc: 0.3
+      max_v_dec: -0.6      # 最高减速度
+      max_w_dec: -0.6
+      extra_stop_v_radio: 0.0 # 停障 v速度增量
+      extra_stop_w_radio: 0.05 # 停障 w速度增量
+      slow_cost: 254.0       # 减速的代价值  减速框
+      stop_cost: 100.0      # 减速的带价值  路径减速
+      max_slope: 0.2614     # 机器减速倾角  15° 最大
+      min_slope: 0.0523     # 机器减速倾角  3°
+      max_camera_distance: 1.2 # 相机减速距离限幅 减速距离根据减速框  
+      driver_type: 1        # 1为后驱,-1为前驱
+      costmap_traverse_inc: 0.05 # 遍历costmap的增量
+      shape:  # 停障框
+        name: stop slow recover danger arc_recover
+        stop:
+          dir_name: stop_shape            # 共同组合成停障框
+          stop_shape:
+            params: [0.60,  0.36,   -0.33,  0.33,
+                    -0.33, -0.33,    0.60, -0.36]  # 矩形
+            start_theta: 0.0              # 起始角度
+            end_theta: 0.0                # 结束角度  下同
+        slow:
+          dir_name: front back left right
+          front:
+            params: [1.0,  0.30,    0.5,  0.30,
+                     0.5, -0.30,    1.0, -0.30]
+          back:
+            params: [0.0,  0.30,    -0.3,  0.30,
+                    -0.3, -0.30,     0.0, -0.30]
+          left:
+            params: [0.6,  0.5,     0.0,  0.5,
+                     0.0,  0.3,     0.6,  0.3]
+          right:
+            params: [0.6, -0.3,     0.0, -0.3,
+                     0.0, -0.5,     0.6, -0.5]
+        recover:
+          dir_name: front back left right
+          front:
+            params: [0.72,  0.40,    0.50,  0.40,
+                     0.50, -0.45,    0.72, -0.40]  # 矩形
+          back:
+            params: [-0.12,  0.40,  -0.40,  0.40,
+                     -0.40, -0.40,  -0.12, -0.40]  # 矩形
+          left:
+            params: [0.50,  0.40,   -0.12, 0.40,
+                    -0.12,  0.20,    0.50,-0.32]  # 矩形
+          right:
+            params: [0.50,  0.32,   -0.12, -0.20,
+                    -0.12, -0.40,    0.50, -0.40]  # 矩形
+        danger:
+          dir_name: front back left right 
+          front:
+            params: [0.56,  0.36,    0.50,  0.36,
+                    0.50,  -0.36,    0.56, -0.36]  # 矩形
+          back:
+            params: [-0.12, 0.36,   -0.35,  0.32,
+                    -0.35, -0.32,   -0.12, -0.36]  # 矩形
+          left:
+            params: [0.56,  0.36,    0.10,  0.36,
+                     0.10,  0.00,    0.56,  0.00]  # 矩形
+          right:
+            key: right
+            params: [0.56,   0.00,   0.10,  0.00,
+                     0.10,  -0.36,   0.56, -0.36]  # 矩形
+         
+        arc_recover:
+          dir_name: left right
+          left:
+            params: [ 0.56,  0.36,   -0.28,  0.36,
+                      0.0,   0.0,     0.56, -0.32]  # 矩形
+          right: 
+            params: [ 0.56,  0.32,    0.0,   0.0,     
+                     -0.28, -0.36,    0.56, -0.36]  # 矩形
+
+
+    path_optimize:
+      global_optimizer:
+        optimize_global_path: true # 是否需要对全局路径进行优化，使用lypu控制器时要为true
+        calc_vel_limit_ctrl: false # 是否需要将控制点添加加减速约束，路径太长时目前计算较长
+        calc_optimize_ctrl: true # 是否需要通过B样条优化控制点，false的话只拟合以及速算速度
+        v_limit: 1.0 # 优化时线速度限制
+        w_limit: 1.0 # 优化时角速度限制
+        acc_limit: 0.3 # 优化时加速度限制
+        bsp_delta_time: 0.2 # B样条优化相关的采样时间
+        sample_delta_time: 0.05 # 路径采样时间
+        lambda1: 0.1
+        lambda2: 0.01
+        lambda3: 0.0
+        lambda4: 200.0
+        use_endpt_opt: false
+        dist: 10.0
+        min_rot_radiu: 0.20
+        max_iteration_num: 5
+        max_iteration_time: 10.0
+        jump_point_size: 0 # 全局路径的跳点数量
+      local_optimizer:
+        optimize_local_path: true # 是否需要对局部绕障路径进行优化，使用lypu控制器时要为true
+        calc_vel_limit_ctrl: true # 是否需要将控制点添加加减速约束，路径太长时目前计算较长
+        calc_optimize_ctrl: true # 是否需要通过B样条优化控制点，false的话只拟合以及速算速度
+        v_limit: 0.8 # 优化时线速度限制
+        w_limit: 1.0 # 优化时角速度限制
+        acc_limit: 1.5 # 优化时加速度限制
+        bsp_delta_time: 0.5 # B样条优化相关的采样时间
+        sample_delta_time: 0.05
+        lambda1: 0.5
+        lambda2: 0.05
+        lambda3: 0.0
+        lambda4: 0.01
+        use_endpt_opt: true
+        dist: 10.0
+        min_rot_radiu: 0.40
+        max_iteration_num: 15
+        max_iteration_time: 0.1
+      edge_optimizer:
+        optimize_global_path: true # 是否需要对全局路径进行优化，使用lypu控制器时要为true
+        calc_vel_limit_ctrl: false # 是否需要将控制点添加加减速约束，路径太长时目前计算较长
+        calc_optimize_ctrl: true # 是否需要通过B样条优化控制点，false的话只拟合以及速算速度
+        v_limit: 0.6 # 优化时线速度限制
+        w_limit: 0.8 # 优化时角速度限制
+        acc_limit: 0.3 # 优化时加速度限制
+        bsp_delta_time: 1.0 # B样条优化相关的采样时间
+        sample_delta_time: 0.05 # 路径采样时间
+        lambda1: 0.1
+        lambda2: 0.01
+        lambda3: 0.0
+        lambda4: 0.0
+        use_endpt_opt: false
+        dist: 10.0
+        min_rot_radiu: 0.20
+        max_iteration_num: 10
+        max_iteration_time: 0.2
+        jump_point_size: 1 # 全局路径的跳点数量
+
+    logic_controller:
+      max_ditance_to_path: 2.0
+      max_path_resolution: 0.5
+      global_planner_algorithm: "dijkstra" # 路径规划算法，"kinodynamic" 和 "dijkstra"可选
+
+    path_follower:
+      max_distance_to_path: 1.0 # 允许偏离任务路径最大值（直线，米）
+      max_angle_to_path: 0.8    # 允许角度偏离任务路径最大值（角度，弧度）
+      obstacle_avoid_distance: 1.3 # 距离障碍物低于此数值时，开始触发绕障
+      obstacle_avoid_behind: 2.5 # 绕障时，选择目标点在障碍物后方的距离
+      max_recover_distance: 1.0
+      dangerous_value: 130 # 判断是否发生碰撞的代价值（大于该值时认为碰撞）
+      avoid_wait_sec: 0 # 触发绕障之前等待时间（单位：秒），该时间内障碍物离开则不触发绕障
+      recover_wait_sec: 3 # 触发倒车之前等待时间（单位：秒），该时间内障碍物离开则不触倒车
+      unreach_wait_sec: 10 # 终点被占用, 结束导航前的等待时间
+      over_time_wait_sec: 30.0
+      over_time_wait_dist: 3.0
+      pause_wait_sec: 30.0
+      rotate_wait_sec: 10.0
+      local_planner_algorithm: "kinodynamic" # 局部规划算法
+      local_controller_algorithm: "lypu" # 局部控制算法，可选"pid" 或 "dwa"
+      edge_controller_algorithm: "stanley" # 局部控制算法，可选"pid" 或 "dwa"
+      xy_goal_tolerance: 0.1 # 判断到达目标点的直线容忍值(米)
+      yaw_goal_tolerance: 0.1 # 判断到达目标点的角度容忍值(弧度)
+      head_length: 0.4        # 机器前向长度(判断 能否切入rotate)
+      tail_length: -0.1       # 机器后向长度(判断 能否切入rotate)
+
+      planner_decision:
+        bussiness_dist: 1.0
+        dynamic_dist: 1.0
+        bussiness_range: 0.1
+        k_safe: 0.6
+        k_bussiness: 0.1
+        k_dynamic: 0.8
+        k_mission: 0.8
+        map_range: 7.0
+        step: 0.3
+        check_map_range: false
+        max_cost: 170
+        min_cost: 120
+      pit:
+        enabled: true
+        avoid_distance: 2.0 # 距离坎低于此数值时，开始触发过坎规划
+        access_interval: 0.1 # 规划的可通行路径间距
+        edge_dist: 1.0 #规划的过坎延边距离
+      controller_algorithm_params:
+        dwa:
+          close_goal_distance: 1.0 # 减速距离(米)
+          slow_down_v: 0.4 # 减速时的线速度（米/秒）
+          slow_down_w: 0.5 # 减速时的角速度（米/秒）
+          sim_distance: 2.5 # 前向采样路径的长度(米)
+          sim_time: 2.0 # 采样时间（秒：该时间在内部会根据最大速度自动调整）
+          vx_samples: 8 # x方向的采样数量（个）
+          vy_samples: 12 # y方向的采样数量（个）
+          vth_samples: 18 # 角度的采样数量（个）
+          max_x: 0.8 # x方向最大线速度（米/秒）
+          min_x: 0.0 # x方向最小线速度（米/秒：负值时可倒车）
+          max_y: 0.0 # y方向最大线速度（米/秒）
+          min_y: 0.0 # y方向最小线速度（米/秒）
+          max_th: 0.5 # 最大角速度（弧度/秒）
+          min_th: 0.0 # 最小角速度（弧度/秒）
+          acc_x: 0.2 # 最大X线加速度（米/秒）
+          acc_y: 0.0 # 最大X线加速度（米/秒）
+          acc_th: 0.5 # 最大X线加速度（米/秒）
+          min_velocity_threshold: 0.1 # 底盘可执行的最小线速度
+          min_rotate_threshold: 0.05 # 底盘可执行的最小角速度
+        pid:
+          kp: 1.5 # PID的P参数
+          ki: 0.001 # PID的I参数
+          kd: 0.0 # PID的D参数
+          kt: 0.03 # PID的T参数
+          wp_tolerance: 1.0 # 在任务路径上选择跟踪点的直线容忍值，倒车时翻倍（米）
+          max_steer: 1.0 # 最大转弯半径（弧度）
+          car_length: 0.38 # 车体前后轮之间的轴距（米）
+          steer_slow_threshold: 0.25 # 当偏差角度大于这个值时（弧度），降低运行速度
+          max_x: 0.5 # x方向最大线速度（米/秒）
+          min_x: 0.0 # x方向最小线速度（米/秒）
+          max_y: 0.0 # y方向最大线速度（米/秒）
+          min_y: 0.0 # y方向最小线速度（米/秒）
+          max_th: 0.5 # 最大角速度（弧度/秒）
+          min_th: 0.0 # 最小角速度（弧度/秒）
+          min_velocity_threshold: 0.1 # 底盘可执行的最小线速度
+          min_rotate_threshold: 0.05 # 底盘可执行的最小角速度
+        lypu:
+          dKx: 0.5
+          dKy: 1.5
+          dKq: 0.6
+          dKd: 1.0
+          dKp: 1.5
+          dKth: 0.5
+          max_x: 0.5 # 最大线速度
+          min_x: 0.01
+          max_th: 0.6 # 最大角速度
+          min_th: 0.02
+          acc: 0.5
+          a_acc: 1.0
+          inverse_dist: 1.0
+        stanley:
+          kag: 0.2
+          kp_e: 1.3
+          kp_soft: 0.2
+          kd_yaw: 0.3
+          kp_v: 0.5
+          car_length: 0.5
+          max_w: 0.5
+          max_vel: 0.6
+          min_w: 0.03
+          min_vel: 0.02
+          sensor: "PSD"
+          psd_forward_install: 0.3712 # 距离机器轮子前方
+          psd_back_install: -0.0808 # 距离机器轮子后方
+          edge_sensor_is_simulation: false
+
+costmap:
+  ros__parameters:
+    debug_mode: false
+
+    rolling_window: true
+    width: 14.4
+    height: 14.4
+    resolution: 0.1
+
+    extra_slow_down_area_size_x: 0.4
+    extra_slow_down_area_size_y: 0.2
+    extra_slow_down_area_threshold_x: 0.1
+    extra_slow_down_area_threshold_w: 0.01
+
+    extra_stop_area_size_x: 0.6
+    extra_stop_area_size_y: 0.2
+    extra_stop_area_threshold_x: 0.1
+    extra_stop_area_threshold_w: 0.1
+
+    extra_area_after_stop_size_x: 0.15 # 停障后停障恢复需要的距离
+
+    # pose_topic: amcl_pose
+    pose_topic: fusion_pose
+    use_navigation_localization: true
+    use_navigation_cmd_vel: true
+    reset_costmap_time_threshhold: 500
+
+    update_frequency: 5.0
+    # 在costmap_layer.cpp会读取footprint大小，设置避障区
+    # footprint: "[[0.20, 0.35], [-0.75, 0.35], [-0.75, -0.35], [0.20, -0.35]]"
+    footprint: "[[0.65, 0.30],[-0.1, 0.30],[-0.1, -0.30],[0.65, -0.30] ]"
+    # footprint: "[[0.8, 0.35],[-0.15, 0.35],[-0.15, -0.35],[0.8, -0.35] ]"
+    footprint_padding: 0.00
+
+    publish_point_cloud: true
+    publish_costmap: true
+    publish_voxel: false
+    publish_clearing_points: false
+    cleraing_cloud_name: "clearing_points"
+
+    mark_unknown_space: false #是否使用static_map上的unknown区域，false的话会把unknown区域设成free
+    init_static_map: false
+    # map_path: "/home/cn/vscode_ws/map_2d.yaml"
+
+  #*********模型配置区域**************
+    static_layer:
+      enabled: true
+      inflate_cost: 200
+      lethal_cost_threshold: 100
+
+    inflation_layer:
+      enabled: true
+      cost_scaling_factor: 3.0   # 膨胀权重
+      inflation_radius: 0.6      # 需要计算膨胀的范围（总范围）
+
+    obstacle_layer:
+      enabled: true
+      names: laser_layer probabiltiy_voxel_layer negative_obstacle_layer
+
+    laser_layer:
+      enabled: true
+      laser_frequency_reduction_count: 2
+      use_for_navigation: true
+      use_for_avoidance: true
+      max_obstacle_height: 1.5
+      min_obstacle_height: -0.2
+      obstacle_range: 8.0
+      raytrace_range: 8.5
+      marking_cloud_sources: scan
+      clearing_cloud_sources: scan
+      avoidance_cloud_sources: scan
+      footprint_clearing_enabled: false
+      combination_method: 1
+
+    probabiltiy_voxel_layer:
+      enabled: true
+      layer_type: ProbabilityVoxelLayer
+      transform_tolerance: 0.3
+      laser_frequency_reduction_count: 2
+      use_for_navigation: true
+      use_for_avoidance: true
+      max_obstacle_height: 1.0
+      min_obstacle_height: 0.0
+      clearing_time_threshold: 20.0
+      marking_cloud_sources: obstacle_cloud_front_down obstacle_cloud_front_up obstacle_cloud_back #dynamic_obstacles pedestrians
+      clearing_cloud_sources: obstacle_cloud_front_down obstacle_cloud_front_up obstacle_cloud_back
+      footprint_clearing_enabled: false
+      combination_method: 1
+      origin_z: 0.0
+      z_voxels: 10
+      z_resolution: 0.1
+      unknown_threshold: 6
+      mark_threshold: 0
+      
+    negative_obstacle_layer:
+      enabled: true
+      layer_type: NegativeObstaclesLayer
+      use_for_navigation: true
+      use_for_avoidance: true
+      footprint_clearing_enabled: false
+      combination_method: 1
+      marking_cloud_sources: steps_cloud_front_up
+
+    #超声模型
+    sonar_layer:
+      enabled: true
+      topics: usound    # 层级使用的传感器名称  用于查找传感器参数
+      clear_time: 15.0
+      
+    #开关量模型，触发上报数值
+    collision_layer:
+      enabled: true
+      topics: touch_edge_1
+      keep_time: 10.0 # 秒
+      
+    #持续上报数值的深度模型
+    range_layer:
+      enabled: true
+      #采用的触感器数据
+      topics: tof_range
+      clear_time: 15.0
+
+  #***********模型适配区域***********
+    data_manager: # 注册回调
+      origin_obstacle_clouds_name: all_obstacle_points #初始的障碍点云，需要分离静态点
+      detach_dynamic_point_cost_threshold: 200 #用于分离出动态点的topic的frame_id
+
+      subscribe_point_cloud_topic: true
+      # topics_3d: all_obstacle_points static_points all_points orbbec_cloud
+      topics_3d: obstacle_cloud_front_down obstacle_cloud_front_up obstacle_cloud_back steps_cloud_front_up
+      topics_2d: scan
+
+      #使用超聲波模型
+      subscribe_range_topic: true
+      range_topics:  tof_range usound
+
+      #开关量模型
+      subscribe_switch_topic: true
+      switch_topic: touch_edge_1
+
+      # 动态障碍物
+      # subscribe_dynamic_obs_topic: true
+      # dynamic_obs_topic: tracking_objects
+
+      # 深度触感器建模为开关量模型，适用范围：开关量激光数据、触发才上报数据的其他传感器
+      # subscribe_switch_range_topic: true
+      # switch_range_topic: switch_range_test
+
+      #红外一类：红外一类的单点模型，上报区间内的连续值
+      # subscribe_ir_topic: true
+      # ir_topic: ir_test #left_tof_sensor right_tof_sensor
+      
+  #**********传感器参数配置区域************
+    usound:
+      frame_id: usound_1 usound_2 usound_3 usound_4 usound_5 usound_6 usound_7 usound_8
+      usound_1: #1 sonar_fl
+        sensor_tf: [ 0.478,  0.161,  0.00] 
+        min_d: 0.14 
+        max_d: 0.24 
+        clear_range: 0.5
+        clear_fov: [0.4,0.034,  0.0,0.0,  0.4,-0.034]
+        enable: true  
+        filter_enable: false
+      usound_2: #sonar_lf
+        sensor_tf: [ 0.336,  0.287,  1.57]
+        min_d: 0.14 
+        max_d: 0.24 
+        clear_range: 0.5
+        clear_fov: [0.4,0.034,  0.0,0.0,  0.4,-0.034]
+        enable: true  
+        filter_enable: false
+      usound_3: #sonar_lb
+        sensor_tf: [-0.039,  0.295,  1.57]
+        min_d: 0.14 
+        max_d: 0.24 
+        clear_range: 0.5
+        clear_fov: [0.4,0.034,  0.0,0.0,  0.4,0.034]
+        enable: true  
+        filter_enable: false
+      usound_4: #sonar_bl
+        sensor_tf: [-0.207,  0.170,  3.14]
+        min_d: 0.14 
+        max_d: 0.24 
+        clear_range: 0.5
+        clear_fov: [0.4,0.034,  0.0,0.0,  0.4,-0.034]
+        enable: true  
+        filter_enable: false
+      usound_5: #sonar_br
+        sensor_tf: [-0.207, -0.170, -3.14]
+        min_d: 0.14 
+        max_d: 0.24 
+        clear_range: 0.5
+        clear_fov: [0.4,0.034,  0.0,0.0,  0.4,-0.034]
+        enable: true  
+        filter_enable: false
+      usound_6: #sonar_rb
+        sensor_tf: [-0.039, -0.295, -1.57]
+        min_d: 0.14 
+        max_d: 0.24 
+        clear_range: 0.5
+        clear_fov: [0.4,0.034,  0.0,0.0,  0.4,-0.034]
+        enable: true  
+        filter_enable: false
+      usound_7: #sonar_rf
+        sensor_tf: [ 0.336, -0.287, -1.57]
+        min_d: 0.14 
+        max_d: 0.24 
+        clear_range: 0.5
+        clear_fov: [0.4,0.034,  0.0,0.0,  0.4,-0.034]
+        enable: true  
+        filter_enable: false
+      usound_8: #sonar_fr
+        sensor_tf: [ 0.478, -0.161, -0.00]
+        min_d: 0.14 
+        max_d: 0.24
+        clear_range: 0.5
+        clear_fov: [0.4,0.034,  0.0,0.0,  0.4,-0.034]
+        enable: true  
+        filter_enable: false
+    
+    touch_edge_1:
+      frame_id: edge
+      edge:
+        sensor_tf: [0.50, 0.35,0.50, 0.0,0.50, -0.35] #[x1,y1 , x2,y2 ,  x3,y3]
+        min_d: 0.02 
+        max_d: 0.20
+        rves_flg: 0 #0：取两边值 1 取中间值
+        enable: true
+    
+    tof_range:
+      frame_id: tof_range_1 tof_range_2
+      tof_range_1: #1 left_tof_sensor_tf
+        sensor_tf: [0.471,  0.30,  0.938]
+        min_d: 0.02 
+        max_d: 0.25 
+        clear_range: 0.5
+        clear_fov: [0.4,0.034,  0.0,0.0,  0.4,-0.034]  # fov 10°
+        enable: true  
+        filter_enable: true
+      tof_range_2: #2 right_tof_sensor_tf
+        sensor_tf: [0.471, -0.30, -0.938] 
+        min_d: 0.02 
+        max_d: 0.25 
+        clear_range: 0.5
+        clear_fov: [0.4,0.034,  0.0,0.0,  0.4,-0.034] # fov 10°
+        enable: true
+        filter_enable: true  
+
+    #传感器对应的一些参数
+    #每个点云topic对应的frame_id,通过frame_id去查找相应的传感器信息
+    all_obstacle_points:
+      frame_id: laser
+    all_points:
+      frame_id: laser
+    static_points:
+      frame_id: map
+    tracking_objects:
+      frame_id: map
+    scan:
+      frame_id: laser
+    obstacle_cloud_front_down:
+      frame_id: camera_front_down
+    obstacle_cloud_front_up:
+      frame_id: camera_front_up
+    obstacle_cloud_back:
+      frame_id: camera_back
+    steps_cloud_front_up:
+      frame_id: camera_front_up
+
+    #每个frame_id对应的传感器信息
+    #sensor_tf：（x,y,yaw）相对base_link的变换
+    #sensor_height：传感器相对地面的高度
+    #need_transform_to_map：使用时是否需要转换到世界坐标系
+    laser:
+      sensor_tf: [0.484, 0.00, 0.50, 0.0, 0.0, 0.0]
+      sensor_height: 0.50
+      need_transform_to_map: true
+    map:
+      sensor_tf: [0.00, 0.00, 0.00]
+      sensor_height: 0.50
+      need_transform_to_map: false
+    edge: # 在base_link坐标系表达
+      lp: [0.50, 0.35]
+      mp: [0.50, 0.0]
+      rp: [0.50, -0.35]
+
+    camera_front_down:
+      # sensor_tf: [0.54, 0.0, 0.1, -1.5708, 0.0, -1.5708] #EVT2
+      read_tf_from_params_system: true
+      tf_name: external_parameter.T_base_camera_front_down
+      sensor_tf: [0.54, 0.0, 0.1, 1.5708, 0.0, 1.5708] #EVT3
+      sensor_height: 0.1
+      need_transform_to_map: true
+      h_fov: 1.13
+      v_fov: 0.78
+      min_d: 0.15
+      max_d: 2.0
+      negative_min_d: 0.15
+      negative_max_d: 1.0
+      min_h: 0.015
+      max_h: 1.0
+
+    camera_front_up:
+      # sensor_tf: [0.402, 0.0, 0.82, -1.8908, 0.0, -1.5708] #EVT2 # x,y,z,r,p,y
+      read_tf_from_params_system: true
+      tf_name: external_parameter.T_base_camera_front_up
+      sensor_tf: [0.402, 0.0, 0.82, -1.9208, 0.0, -1.5708] #EVT3
+      sensor_height: 0.82
+      need_transform_to_map: true
+      h_fov: 1.13
+      v_fov: 0.78
+      min_d: 0.15
+      max_d: 2.0
+      negative_min_d: 0.15
+      negative_max_d: 2.0
+      min_h: 0.1
+      max_h: 1.0
+
+    camera_back:
+      # sensor_tf: [-0.192, 0.0, 0.67, -2.1643, 0.0, 1.5708]  #EVT2 # x,y,z,r,p,y
+      read_tf_from_params_system: true
+      tf_name: external_parameter.T_base_camera_back
+      sensor_tf: [-0.192, 0.0, 0.65, -2.1908, 0.0, 1.5708] #EVT3
+      sensor_height: 0.65
+      need_transform_to_map: true
+      h_fov: 1.13
+      v_fov: 0.78
+      min_d: 0.15
+      max_d: 2.0
+      negative_min_d: 0.15
+      negative_max_d: 2.0
+      min_h: 0.1
+      max_h: 1.0

@@ -1,0 +1,10 @@
+#!/bin/bash 
+ 
+#编译gsetting文件
+glib-compile-schemas /usr/share/glib-2.0/schemas
+
+#systemd更新、使能开机自启和重启服务
+systemctl daemon-reload
+systemctl enable full_coverage_planner_ros2
+systemctl restart full_coverage_planner_ros2
+

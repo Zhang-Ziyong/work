@@ -1,0 +1,18 @@
+#!/bin/bash 
+ 
+if [ ! -f /lib/systemd/system/app_env_init.target ]; then
+    echo "create /lib/systemd/system/app_env_init.target"
+    echo "[Unit]" > /lib/systemd/system/app_env_init.target
+fi
+
+#编译gsetting文件
+glib-compile-schemas /usr/share/glib-2.0/schemas
+
+#systemd更新、使能开机自启和重启服务
+systemctl daemon-reload
+systemctl enable slam2d
+systemctl restart slam2d
+systemctl restart map_manager
+if [ $? -ne 0 ]; then
+	echo "fail to restart map_manager,please check app exist"
+fi

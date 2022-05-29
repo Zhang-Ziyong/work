@@ -1,0 +1,22 @@
+#!/bin/bash 
+ 
+if [ ! -f /lib/systemd/system/app_env_init.target ]; then
+    echo "create /lib/systemd/system/app_env_init.target"
+    echo "[Unit]" > /lib/systemd/system/app_env_init.target
+fi
+
+#编译gsetting文件
+glib-compile-schemas /usr/share/glib-2.0/schemas
+
+#systemd更新、使能开机自启和重启服务
+systemctl daemon-reload
+systemctl enable navigation
+systemctl restart navigation
+
+if [ $USERDATA_PATH ]; then
+    echo "oem"
+else
+    mkdir -p /etc/robot
+    cp -r /oem/script/*  /etc/robot/
+fi
+

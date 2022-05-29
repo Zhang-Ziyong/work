@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package slam2d.mapping.proto;
+
+import "proto/pose_graph.proto";
+import "proto/submap.proto";
+import "proto/trajectory_node_data.proto";
+import "proto/sensor.proto";
+
+
+message SubmapData {
+  int32 submap_id = 1;
+  Submap submap_data = 2;
+}
+
+
+message Node {
+  int32 node_id = 1;
+  TrajectoryNodeData node_data = 5;
+}
+
+message SerializationHeader {
+  uint32 format_version = 1;
+}
+
+message SerializedData {
+  oneof data {
+    PoseGraph pose_graph = 1;
+    SubmapData submap = 3;
+    Node node = 4;
+    OdometryData odometry_data = 7;
+  }
+}

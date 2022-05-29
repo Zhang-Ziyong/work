@@ -1,0 +1,6 @@
+<cvte_robot_scm>
+    <Package name="common" version="1.0.0.87.dev" />
+    <Package name="robot_toolkits" version="1.0.0.4.dev" />
+    <Package name="cvte_interfaces" version="1.0.0.40.dev" />
+</cvte_robot_scm>
+

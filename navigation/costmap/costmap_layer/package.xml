@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>costmap_layer</name>
+  <version>0.0.0</version>
+  <description>The costmap_layer package.</description>
+  <maintainer email="chenmingjian@cvte.com">chenmingjian</maintainer>
+  <maintainer email="wuhuabo@cvte.com">chenmingjian</maintainer>
+  <license>TODO</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <build_depend>rclcpp</build_depend>
+  <build_depend>costmap_base</build_depend>
+  <build_depend>costmap_mediator</build_depend>
+  <build_depend>data_manager</build_depend>
+
+  <exec_depend>rclcpp</exec_depend>
+  <exec_depend>costmap_base</exec_depend>
+  <exec_depend>costmap_mediator</exec_depend>
+  <exec_depend>data_manager</exec_depend>
+
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

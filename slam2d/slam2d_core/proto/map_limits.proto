@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+import "proto/cell_limits.proto";
+import "proto/transform.proto";
+
+package slam2d.mapping.proto;
+
+message MapLimits {
+  double resolution = 1;
+  Vector2d max = 2;
+  CellLimits cell_limits = 3;
+}

@@ -1,0 +1,29 @@
+ground_segment:
+  ros__parameters:
+    print_log: false
+
+    sensor_height: 0.50
+    sensor_pitch: 0.000
+
+    topic_name: "velodyne_points"
+    region_intesest: 20
+    region_filter_threshold: 0.35
+
+    grid_resolution: 0.2
+    th_grid_het: 0.1
+
+    search_k: 30
+    curb_z: 0.10
+
+    downsample: true
+
+    remove_outlier: true
+    remove_outlier_radius: 0.10
+    min_neighbors_in_radius: 20
+
+    cloud_sum: 1
+    curb_sum: true
+    set_ground_zero: true
+
+    img_width: 640
+    img_height: 360

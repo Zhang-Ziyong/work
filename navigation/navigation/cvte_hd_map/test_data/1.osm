@@ -1,0 +1,188 @@
+<osm version="0.6" generator="lanelet2">
+  <node id="2" visible="true" version="1" lat="0.00003662708311430096" lon="-0.000037304068183380526"/>
+  <node id="3" visible="true" version="1" lat="0.000036876570775608835" lon="0.000022822458342723444"/>
+  <node id="4" visible="true" version="1" lat="-0.00005718027777369997" lon="0.000020327581723356948"/>
+  <node id="5" visible="true" version="1" lat="-0.0000444564070146613" lon="-0.000038052531169100655"/>
+  <node id="7" visible="true" version="1" lat="0.00003835531933134598" lon="-0.000058170829363890465"/>
+  <node id="8" visible="true" version="1" lat="-0.000043327630690206265" lon="-0.00004219625129771451"/>
+  <node id="9" visible="true" version="1" lat="-0.000047205132143943573" lon="0.000028265067623076163"/>
+  <node id="10" visible="true" version="1" lat="0.000037910425984428986" lon="0.00002102018631636417"/>
+  <node id="12" visible="true" version="1" lat="0.000013028114609019742" lon="-0.00011269807014661252"/>
+  <node id="13" visible="true" version="1" lat="-0.0000019091795003552702" lon="-0.00011753072412317506"/>
+  <node id="15" visible="true" version="1" lat="0.000020499795676188082" lon="-0.00031688443097339366"/>
+  <node id="16" visible="true" version="1" lat="0.000020499795676188082" lon="-0.0002824252081183686"/>
+  <node id="17" visible="true" version="1" lat="-0.000041509407509934073" lon="-0.0002806805336230637"/>
+  <node id="18" visible="true" version="1" lat="-0.000041086900490755604" lon="-0.00031761760592779407"/>
+  <node id="20" visible="true" version="1" lat="-0.00001469260213323738" lon="-0.00009363265736833499"/>
+  <node id="21" visible="true" version="1" lat="-0.000014363676690278505" lon="-0.00006425699132429193"/>
+  <node id="22" visible="true" version="1" lat="-0.000042099846825062904" lon="-0.00006387867349441325"/>
+  <node id="23" visible="true" version="1" lat="-0.00004438618778555771" lon="-0.00009033337007353291"/>
+  <node id="25" visible="true" version="1" lat="0.00002819813269739291" lon="-0.00004487652290250102"/>
+  <node id="26" visible="true" version="1" lat="0.00002929789512899362" lon="-0.00003167937372419105"/>
+  <node id="27" visible="true" version="1" lat="0.000009868758838279698" lon="-0.000028746673906589196"/>
+  <node id="28" visible="true" version="1" lat="0.000003636771725875831" lon="-0.00004414334794899885"/>
+  <node id="30" visible="true" version="1" lat="0.000013028114609300462" lon="-0.00011269807014661252"/>
+  <node id="31" visible="true" version="1" lat="-0.0000019091795000745178" lon="-0.00011753072412317499"/>
+  <node id="32" visible="true" version="1" lat="-0.000006302501297230264" lon="0.000024593236005731247"/>
+  <node id="33" visible="true" version="1" lat="-0.0000005911829612927562" lon="-0.000008356677470831256"/>
+  <node id="35" visible="true" version="1" lat="-0.000009208315610206353" lon="-0.00019022395129514476"/>
+  <node id="36" visible="true" version="1" lat="-0.000009276346744294184" lon="-0.0001474664818199545"/>
+  <node id="37" visible="true" version="1" lat="-0.00004689417026831049" lon="-0.00014726688172913386"/>
+  <node id="38" visible="true" version="1" lat="-0.000047316939473233094" lon="-0.0001894783684187057"/>
+  <node id="41" visible="true" version="1" lat="0.000013028114609300462" lon="-0.00011269807014661252"/>
+  <node id="42" visible="true" version="1" lat="-0.0000019091795000745178" lon="-0.00011753072412317499"/>
+  <node id="43" visible="true" version="1" lat="-0.000006302501296949543" lon="0.000024593236005731247"/>
+  <node id="44" visible="true" version="1" lat="-0.0000005911829610120357" lon="-0.000008356677470831256"/>
+  <node id="45" visible="true" version="1" lat="0.000013028114609300462" lon="-0.00011269807014661252"/>
+  <node id="46" visible="true" version="1" lat="-0.0000019091795000745178" lon="-0.00011753072412317499"/>
+  <node id="47" visible="true" version="1" lat="0.000016100745949785328" lon="-0.0002567640847152508"/>
+  <node id="48" visible="true" version="1" lat="0.000011335108747080658" lon="-0.00004304358551739817"/>
+  <node id="49" visible="true" version="1" lat="-0.00007517953586858039" lon="-0.000044509935426199096"/>
+  <node id="50" visible="true" version="1" lat="-0.00007517953586858039" lon="-0.00025456455985204947"/>
+  <node id="52" visible="true" version="1" lat="0.000009135583883879265" lon="-0.00019151151377630484"/>
+  <node id="53" visible="true" version="1" lat="0.000008768996406679049" lon="-0.00015595252848967913"/>
+  <node id="54" visible="true" version="1" lat="-0.000013226252224436453" lon="-0.00015228665371767685"/>
+  <node id="55" visible="true" version="1" lat="-0.00001945823933684038" lon="-0.00018381317675599833"/>
+  <node id="57" visible="true" version="1" lat="-0.0000033283903409285636" lon="-0.00013762315463056597"/>
+  <node id="58" visible="true" version="1" lat="-0.000004061565295329028" lon="-0.00005807367208170931"/>
+  <node id="59" visible="true" version="1" lat="-0.00006381532407627157" lon="-0.00005624073469570813"/>
+  <node id="60" visible="true" version="1" lat="-0.00006528167398507248" lon="-0.0001651172154187866"/>
+  <node id="62" visible="true" version="1" lat="0.00003901084012028064" lon="-0.000038758574968223745"/>
+  <node id="63" visible="true" version="1" lat="-0.00004137477583060097" lon="-0.000040175061592908936"/>
+  <node id="64" visible="true" version="1" lat="-0.00004172889748677227" lon="0.000030295147985176793"/>
+  <node id="65" visible="true" version="1" lat="0.00003901084012028064" lon="0.000022150349893237196"/>
+  <node id="67" visible="true" version="1" lat="-0.00003358409939466528" lon="-0.00021298642980468143"/>
+  <node id="68" visible="true" version="1" lat="-0.00003358409939466528" lon="-0.0001687212227830898"/>
+  <node id="69" visible="true" version="1" lat="-0.00006403856182523283" lon="-0.00016907534443915472"/>
+  <node id="70" visible="true" version="1" lat="-0.00006474680513826103" lon="-0.00021227818649255156"/>
+  <node id="72" visible="true" version="1" lat="-0.000011628556712351089" lon="-0.00013614203041523434"/>
+  <node id="73" visible="true" version="1" lat="-0.000014107408305703928" lon="-0.00008019080873990662"/>
+  <node id="74" visible="true" version="1" lat="-0.00004739484398568934" lon="-0.00007877432211564685"/>
+  <node id="75" visible="true" version="1" lat="-0.00005943498029549036" lon="-0.00014109973360194004"/>
+  <node id="77" visible="true" version="1" lat="0.000010326985969963071" lon="-0.00025760575848233797"/>
+  <node id="78" visible="true" version="1" lat="0.0000032445528468677764" lon="-0.00006142236096307514"/>
+  <node id="79" visible="true" version="1" lat="-0.00006439268348129777" lon="-0.00005894350936972227"/>
+  <node id="80" visible="true" version="1" lat="-0.00006580917010645584" lon="-0.00024804447376588974"/>
+  <node id="82" visible="true" version="1" lat="0.000014930567500633281" lon="-0.00027495771963447066"/>
+  <node id="83" visible="true" version="1" lat="0.000012097594251263006" lon="-0.000051506954590390036"/>
+  <node id="84" visible="true" version="1" lat="-0.00007218335991750274" lon="-0.00004938222465336238"/>
+  <node id="85" visible="true" version="1" lat="-0.00006970450832430376" lon="-0.0002792071795085261"/>
+  <node id="87" visible="true" version="1" lat="-0.000025439301302476816" lon="-0.0002349419724869956">
+    <tag k="cvte_type" v="mark_point"/>
+    <tag k="cvte_point_type" v="access_lift"/>
+    <tag k="cvte_name" v=""/>
+    <tag k="cvte_take_lift_point_id" v="1002"/>
+  </node>
+  <node id="1002" visible="true" version="1" lat="-0.000044297050000333314" lon="-0.0002090946799997611">
+    <tag k="cvte_point_type" v="take_lift"/>
+    <tag k="cvte_type" v="mark_point"/>
+    <tag k="cvte_yaw" v="-0.278558"/>
+    <tag k="cvte_name" v="快看看"/>
+    <tag k="cvte_lift_id" v="718289743787151360"/>
+    <tag k="cvte_access_lift_point_id" v="87"/>
+    <tag k="cvte_waiting_lift_point_id" v="1003"/>
+  </node>
+  <node id="1003" visible="true" version="1" lat="-0.00005660200704607258" lon="-0.00026397994829330343">
+    <tag k="cvte_type" v="mark_point"/>
+    <tag k="cvte_point_type" v="waiting_lift"/>
+    <tag k="cvte_name" v=""/>
+    <tag k="cvte_take_lift_point_id" v="[1002]"/>
+  </node>
+  <way id="19" visible="true" version="1">
+    <tag k="cvte_type" v="mark_polygon"/>
+    <tag k="cvte_region_type" v="narrow_aisle"/>
+    <tag k="area" v="true"/>
+    <tag k="cvte_name" v="1"/>
+    <nd ref="15"/>
+    <nd ref="16"/>
+    <nd ref="17"/>
+    <nd ref="18"/>
+  </way>
+  <way id="56" visible="true" version="1">
+    <tag k="cvte_type" v="mark_polygon"/>
+    <tag k="cvte_region_type" v="narrow_aisle"/>
+    <tag k="area" v="true"/>
+    <tag k="cvte_name" v=""/>
+    <nd ref="52"/>
+    <nd ref="53"/>
+    <nd ref="54"/>
+    <nd ref="55"/>
+  </way>
+  <way id="66" visible="true" version="1">
+    <tag k="cvte_type" v="mark_polygon"/>
+    <tag k="cvte_region_type" v="business"/>
+    <tag k="area" v="true"/>
+    <tag k="cvte_name" v=""/>
+    <nd ref="62"/>
+    <nd ref="63"/>
+    <nd ref="64"/>
+    <nd ref="65"/>
+  </way>
+  <way id="71" visible="true" version="1">
+    <tag k="cvte_type" v="mark_polygon"/>
+    <tag k="cvte_region_type" v="mark_area"/>
+    <tag k="area" v="true"/>
+    <tag k="cvte_name" v=""/>
+    <nd ref="67"/>
+    <nd ref="68"/>
+    <nd ref="69"/>
+    <nd ref="70"/>
+  </way>
+  <way id="76" visible="true" version="1">
+    <tag k="cvte_type" v="mark_polygon"/>
+    <tag k="cvte_region_type" v="slope"/>
+    <tag k="area" v="true"/>
+    <tag k="cvte_floor_material" v="other"/>
+    <tag k="cvte_floor_color" v="other"/>
+    <tag k="cvte_is_static" v="yes"/>
+    <tag k="cvte_name" v=""/>
+    <nd ref="72"/>
+    <nd ref="73"/>
+    <nd ref="74"/>
+    <nd ref="75"/>
+  </way>
+  <way id="81" visible="true" version="1">
+    <tag k="cvte_type" v="mark_polygon"/>
+    <tag k="cvte_region_type" v="mark_area"/>
+    <tag k="area" v="true"/>
+    <tag k="cvte_floor_material" v="other"/>
+    <tag k="cvte_floor_color" v="black"/>
+    <tag k="cvte_is_static" v="yes"/>
+    <tag k="cvte_name" v=""/>
+    <nd ref="77"/>
+    <nd ref="78"/>
+    <nd ref="79"/>
+    <nd ref="80"/>
+  </way>
+  <way id="86" visible="true" version="1">
+    <tag k="cvte_type" v="mark_polygon"/>
+    <tag k="cvte_region_type" v="business"/>
+    <tag k="area" v="true"/>
+    <tag k="cvte_floor_material" v="other"/>
+    <tag k="cvte_floor_color" v="other"/>
+    <tag k="cvte_is_static" v="yes"/>
+    <tag k="cvte_name" v=""/>
+    <nd ref="82"/>
+    <nd ref="83"/>
+    <nd ref="84"/>
+    <nd ref="85"/>
+  </way>
+  <map_info>
+    <map_id>eaa39f38-3383-42c0-8735-5ad232e3e5d9</map_id>
+    <map_name>b10_simu_laroom</map_name>
+    <width>1080</width>
+    <height>626</height>
+    <origin_x>-39.790027</origin_x>
+    <origin_y>-21.745798</origin_y>
+    <origin_z>0</origin_z>
+    <origin_yaw>0</origin_yaw>
+    <origin_gps_lat>0</origin_gps_lat>
+    <origin_gps_lon>0</origin_gps_lon>
+    <origin_gps_yaw>0</origin_gps_yaw>
+    <resolution>0.05</resolution>
+    <edit_map_png_file_key>kavabot/map/8ae7c7c73e854c78a3c59c7fac9c0fe3</edit_map_png_file_key>
+    <original_map_png_file_key>kavabot/map/f62f356b9a404c48b8773d9a2d88d165</original_map_png_file_key>
+    <map_zip_file_key>kavabot/map/cd519765d9724c57b78cb8720d822cd7</map_zip_file_key>
+    <version>104</version>
+  </map_info>
+</osm>

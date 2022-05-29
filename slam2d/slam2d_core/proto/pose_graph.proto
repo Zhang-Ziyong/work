@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package slam2d.mapping.proto;
+
+import "proto/trajectory.proto";
+import "proto/transform.proto";
+
+message PoseGraph {
+  message Constraint {
+
+    enum Tag {
+      INTRA_SUBMAP = 0;
+      INTER_SUBMAP = 1;
+    }
+
+    int32 submap_id = 1;  // Submap ID.
+    int32 node_id = 2;  // Node ID.
+    Rigid3 relative_pose = 3;
+    double translation_weight = 6;
+    double rotation_weight = 7;
+    Tag tag = 5;
+  }
+
+  repeated Constraint constraint = 2;
+  Trajectory trajectory = 4;
+}

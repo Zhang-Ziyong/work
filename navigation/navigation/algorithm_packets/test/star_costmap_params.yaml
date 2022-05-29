@@ -1,0 +1,71 @@
+dijkstar_tester:
+    ros__parameters:
+        #costmap_2d_main
+        rolling_window: false
+        width: 10.0
+        height: 10.0
+        resolution: 0.1
+
+        #costmap_2d_ros
+        global_frame: map
+        robot_base_frame: base_link
+        update_frequency: 2.0
+        publish_frequency: 1.0
+        footprint: "[[-0.2, 0.35], [0.70, 0.35], [0.70, -0.35], [-0.20, -0.35]]"
+        footprint_padding: 0.01
+        track_unknown_space: false
+        published_footprint: global_footprint
+        get_pose_by_tf: true
+        pose_topic: fusion_pose
+        # pose_topic: amcl_pose
+        pose_topic_default_qos: false
+
+        #static_layer
+        map_path: "/home/droid/Development/babot_ws/src/navigation_algo/navigation/star_algorithm/test/ThirtyByThirty.yaml"
+        #map_path: "/home/droid/Development/babot_ws/src/navigation_algo/navigation/star_algorithm/test/TenByTen.yaml"
+        #map_path: "/home/droid/Development/babot_ws/src/navigation_algo/navigation/star_algorithm/test/TwentyByTwenty.yaml"
+        lethal_cost_threshold: 100
+        #obstacle_layer
+        transform_tolerance: 0.3
+        laser_frequency_reduction_count: 5
+        observation_sources: "scan"
+        scan:
+            topic: scan
+            observation_persistence: 0.0
+            marking: true
+            clearing: true
+            max_obstacle_height: 2.0
+            min_obstacle_height: 0.0
+            obstacle_range: 6.0
+            raytrace_range: 10.0
+            data_type: LaserScan
+            expected_update_rate: 0.5       
+        #robot_radius: 0.46
+        
+        # base_scan: {data_type: LaserScan, expected_update_rate: 0.4,
+        
+        static_layer: 
+            enabled: true
+
+        obstacle_layer: 
+            enabled: false
+            footprint_clearing_enabled: false
+            combination_method: 0
+
+        range_sesor_layer: 
+            enabled: false
+            #topics: sonarclKs106 sonarmlKs106 sonarmrKs106
+            clear_threshold: 0.4
+            mark_threshold: 0.6
+            inflate_cone: 1.0
+            phi: 0.75
+            topics: sonarfcks sonarfrks sonarflks sonarlfks sonarlbks sonarrfks sonarrbks sonarblks sonarbrks 
+            # sonarflks sonarfcks  
+            clear_on_max_reading: false
+
+        inflation_layer: 
+            enabled: true
+            cost_scaling_factor: 5.0
+            inflation_radius: 0.1
+            inflate_unknown: false
+

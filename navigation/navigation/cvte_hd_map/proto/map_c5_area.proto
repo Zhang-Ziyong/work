@@ -1,0 +1,116 @@
+syntax = "proto2";
+
+package cvte.hdmap;
+// /home/cvte/Development/CVTERobot/src/navigation/navigation
+import "map_id.proto";
+
+import "map_geometry.proto";
+
+message MapArea {
+    optional Id id = 1;
+
+    optional Polygon polygon = 2;
+
+    repeated Id cleanArea_Id = 3;
+}
+
+message CleanArea {
+  optional Id id = 1;
+
+  optional Polygon polygon = 2;
+
+  optional double speed = 3;
+
+  optional string material = 4;
+
+  optional string color = 5;
+
+  optional string static_area = 6;
+}
+
+message SlopeArea {
+    optional Id id = 1;
+
+    optional Polygon polygon = 2;
+
+    optional double angle = 3;
+
+    optional double length = 4;
+
+    optional double speed = 5;
+
+    optional string material = 6;
+
+    optional string color = 7;
+
+    optional string static_area = 8;
+}
+
+message PitArea {
+    optional Id id = 1;
+
+    optional Polygon polygon = 2;
+
+    optional double angle = 3;
+
+    optional double length = 4;
+
+    optional double speed = 5;
+
+    optional string material = 6;
+
+    optional string color = 7;
+
+    optional string static_area = 8;
+}
+
+message Elevator {
+    optional Id id = 1;
+
+    optional Polygon polygon = 2;
+}
+
+message NarrowArea {
+    optional Id id = 1;
+
+    optional Polygon polygon = 2;
+
+    optional double width = 3;
+
+    optional double length = 4;
+
+    optional double speed = 5;
+
+    optional string material = 6;
+
+    optional string color = 7;
+
+    optional string static_area = 8;
+}
+
+message MarkArea {
+    optional Id id = 1;
+
+    optional Polygon polygon = 2;
+
+    optional double speed = 3;
+
+    optional string color = 4;
+
+    optional string material = 5;
+
+    optional string static_area = 6;
+}
+
+message ProhibitedArea {
+    optional Id id = 1;
+
+    optional Polygon polygon = 2;
+
+    optional string reason = 3;
+}
+
+message BlackArea {
+    optional Id id = 1;
+    optional Polygon polygon = 2;
+}

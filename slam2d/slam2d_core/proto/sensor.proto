@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package slam2d.mapping.proto;
+
+import "proto/transform.proto";
+
+message RangePoint {
+  Vector3d position = 1;
+}   
+
+message OdometryData {
+  int64 timestamp = 1;
+  Rigid3 pose = 2;
+}

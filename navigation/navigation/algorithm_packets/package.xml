@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format2.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="2">
+  <name>algorithm_packets</name>
+  <version>0.0.0</version>
+  <description>TODO: Package description</description>
+  <maintainer email="liangjiajun@cvte.com">liangjiajun</maintainer>
+  <license>TODO: License declaration</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <build_depend>pose2d</build_depend>
+  <build_depend>costmap_layer</build_depend>
+  <build_depend>costmap_builder</build_depend>
+  <build_depend>costmap_base</build_depend>
+  <build_depend>costmap_mediator</build_depend>
+  <build_depend>log</build_depend>
+  <build_depend>planner_utils</build_depend>
+
+  <exec_depend>pose2d</exec_depend>
+  <exec_depend>log</exec_depend>
+  <exec_depend>costmap_layer</exec_depend>
+  <exec_depend>costmap_builder</exec_depend>
+  <exec_depend>costmap_base</exec_depend>
+  <exec_depend>costmap_mediator</exec_depend>
+  <exec_depend>planner_utils</exec_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
+

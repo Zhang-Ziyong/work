@@ -1,0 +1,220 @@
+costmap:
+  ros__parameters:
+    debug_mode: false
+
+    rolling_window: true
+    width: 20.0
+    height: 20.0
+    resolution: 0.1
+
+    extra_slow_down_area_size_x: 0.4
+    extra_slow_down_area_size_y: 0.2
+    extra_slow_down_area_threshold_x: 0.1
+    extra_slow_down_area_threshold_w: 0.01
+
+    extra_stop_area_size_x: 0.6
+    extra_stop_area_size_y: 0.2
+    extra_stop_area_threshold_x: 0.1
+    extra_stop_area_threshold_w: 0.1
+
+    extra_area_after_stop_size_x: 0.15 # 停障后停障恢复需要的距离
+
+    # pose_topic: amcl_pose
+    pose_topic: fusion_pose
+    use_navigation_localization: false
+    use_navigation_cmd_vel: false
+    reset_costmap_time_threshhold: 40
+
+    update_frequency: 5.0
+    # 在costmap_layer.cpp会读取footprint大小，设置避障区
+    # footprint: "[[0.20, 0.35], [-0.75, 0.35], [-0.75, -0.35], [0.20, -0.35]]"
+    footprint: "[[0.5, 0.30],[-0.1, 0.30],[-0.1, -0.30],[0.5, -0.30] ]"
+    # footprint: "[[0.8, 0.35],[-0.15, 0.35],[-0.15, -0.35],[0.8, -0.35] ]"
+    footprint_padding: 0.00
+
+    publish_point_cloud: true
+    publish_costmap: true
+    publish_voxel: false
+    publish_clearing_points: false
+    cleraing_cloud_name: "clearing_points"
+
+    mark_unknown_space: false #是否使用static_map上的unknown区域，false的话会把unknown区域设成free
+    init_static_map: false
+    # map_path: "/home/cn/vscode_ws/map_2d.yaml"
+
+    static_layer:
+      enabled: false
+      inflate_cost: 200
+      lethal_cost_threshold: 100
+
+    inflation_layer:
+      enabled: false
+      cost_scaling_factor: 3.0
+      inflation_radius: 0.6
+
+    obstacle_layer:
+      enabled: true
+      names: laser_layer probabiltiy_voxel_layer #negative_obstacle_layer
+
+    laser_layer:
+      enabled: false
+      laser_frequency_reduction_count: 2
+
+      use_for_navigation: true
+      use_for_avoidance: true
+
+      max_obstacle_height: 1.5
+      min_obstacle_height: -0.2
+      obstacle_range: 8.0
+      raytrace_range: 8.5
+
+      marking_cloud_sources: scan
+      clearing_cloud_sources: scan
+
+      avoidance_cloud_sources: scan
+      footprint_clearing_enabled: false
+      combination_method: 1
+
+    probabiltiy_voxel_layer:
+      enabled: false
+      layer_type: ProbabilityVoxelLayer
+      transform_tolerance: 0.3
+      laser_frequency_reduction_count: 2
+      use_for_navigation: true
+      use_for_avoidance: true
+
+      max_obstacle_height: 1.0
+      min_obstacle_height: 0.0
+
+      clearing_time_threshold: 60.0
+      marking_cloud_sources: obstacle_cloud_front_down obstacle_cloud_front_up #dynamic_obstacles pedestrians
+      clearing_cloud_sources: obstacle_cloud_front_down obstacle_cloud_front_up
+
+      footprint_clearing_enabled: false
+      combination_method: 1
+
+      origin_z: 0.0
+      z_voxels: 10
+      z_resolution: 0.1
+      unknown_threshold: 6
+      mark_threshold: 0
+
+    negative_obstacle_layer:
+      enabled: false
+      layer_type: NegativeObstaclesLayer
+      use_for_navigation: true
+      use_for_avoidance: true
+      footprint_clearing_enabled: false
+      combination_method: 1
+
+      marking_cloud_sources: steps_cloud_front_up
+
+    sonar_layer:
+      enabled: true
+      topics: sonar_fl sonar_fr sonar_lf sonar_rf sonar_lb sonar_rb sonar_bl sonar_br
+      use_for_navigation: false # 是否在costmap中加入超声层进行导航避障
+      clear_on_max_reading: false # 是否使用max_range进行障碍物的清除
+      max_obs_range: 1.5
+
+    range_layer:
+      enabled: true
+      topics: sonar_fl sonar_fr sonar_lf sonar_rf sonar_lb sonar_rb sonar_bl sonar_br
+      min_dist: 0.001
+      max_dist: 0.2
+      clear_time: 3.0
+
+    #需要订阅的topic
+    data_manager:
+      origin_obstacle_clouds_name: all_obstacle_points #初始的障碍点云，需要分离静态点
+      detach_dynamic_point_cost_threshold: 200 #用于分离出动态点的topic的frame_id
+
+      subscribe_point_cloud_topic: true
+      # topics_3d: all_obstacle_points static_points all_points orbbec_cloud
+      topics_3d: obstacle_cloud_front_down  obstacle_cloud_front_up
+      topics_2d: scan
+
+      subscribe_dynamic_obs_topic: true
+      dynamic_obs_topic: tracking_objects
+
+      subscribe_sonar_topic: true
+      sonar_topics: sonar_fl sonar_fr sonar_lf sonar_rf sonar_lb sonar_rb sonar_bl sonar_br
+
+    #传感器对应的一些参数
+    #每个点云topic对应的frame_id,通过frame_id去查找相应的传感器信息
+    all_obstacle_points:
+      frame_id: laser
+    all_points:
+      frame_id: laser
+    static_points:
+      frame_id: map
+    tracking_objects:
+      frame_id: map
+    scan:
+      frame_id: laser
+
+    obstacle_cloud_front_down:
+      frame_id: camera_front_down
+    obstacle_cloud_front_up:
+      frame_id: camera_front_up
+    obstacle_cloud_back:
+      frame_id: camera_back
+    steps_cloud_front_up:
+      frame_id: camera_front_up
+
+    #每个frame_id对应的传感器信息
+    #sensor_tf：（x,y,yaw）相对base_link的变换
+    #sensor_height：传感器相对地面的高度
+    #need_transform_to_map：使用时是否需要转换到世界坐标系
+    laser:
+      sensor_tf: [0.484, 0.00, 0.50, 0.0, 0.0, 0.0]
+      sensor_height: 0.50
+      need_transform_to_map: true
+    map:
+      sensor_tf: [0.00, 0.00, 0.00]
+      sensor_height: 0.50
+      need_transform_to_map: false
+
+    camera_front_down:
+      # sensor_tf: [0.54, 0.0, 0.1, -1.5708, 0.0, -1.5708] #EVT2
+      sensor_tf: [0.54, 0.0, 0.1, 1.52, 0.0, 1.5708] #EVT3
+      sensor_height: 0.1
+      need_transform_to_map: true
+      h_fov: 1.0
+      v_fov: 0.72
+      min_d: 0.3
+      max_d: 3.0
+      min_h: 0.0
+      max_h: 1.0
+
+    camera_front_up:
+      # sensor_tf: [0.402, 0.0, 0.82, -1.8908, 0.0, -1.5708] #EVT2 # x,y,z,r,p,y
+      sensor_tf: [0.402, 0.0, 0.82, -1.9208, 0.0, -1.5708] #EVT3
+      sensor_height: 0.82
+      need_transform_to_map: true
+      h_fov: 1.13
+      v_fov: 0.72
+      min_d: 0.3
+      max_d: 3.0
+      min_h: 0.1
+      max_h: 1.0
+
+    camera_back:
+      # sensor_tf: [-0.192, 0.0, 0.67, -2.1643, 0.0, 1.5708]  #EVT2 # x,y,z,r,p,y
+      sensor_tf: [-0.192, 0.0, 0.65, -2.1908, 0.0, 1.5708] #EVT3
+      sensor_height: 0.65
+      need_transform_to_map: true
+      h_fov: 1.13
+      v_fov: 0.72
+      min_d: 0.3
+      max_d: 3.0
+      min_h: 0.1
+      max_h: 1.0
+
+    sonar_fl_sensor_tf: [0.347, 0.150, 0.174]
+    sonar_fr_sensor_tf: [0.347, -0.150, -0.174]
+    sonar_lf_sensor_tf: [0.175, 0.290, 1.510]
+    sonar_rf_sensor_tf: [0.175, -0.290, -1.510]
+    sonar_lb_sensor_tf: [-0.175, 0.294, 1.614]
+    sonar_rb_sensor_tf: [-0.175, -0.294, -1.614]
+    sonar_bl_sensor_tf: [-0.352, 0.150, 3.05]
+    sonar_br_sensor_tf: [-0.352, -0.150, -3.05]

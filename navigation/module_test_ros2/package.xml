@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format2.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="2">
+  <name>module_test_ros2</name>
+  <version>0.0.0</version>
+  <description>TODO: Package description</description>
+  <maintainer email="liangjiajun@cvte.com">liangjiajun</maintainer>
+  <license>TODO: License declaration</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  
+  <build_depend>costmap_base</build_depend>
+  <build_depend>costmap_layer</build_depend>
+  <build_depend>costmap_builder</build_depend>
+  <build_depend>perception</build_depend>
+  <build_depend>nav_msgs</build_depend>
+  <build_depend>costmap_ros2</build_depend>
+  <build_depend>rclcpp</build_depend>
+  <build_depend>costmap_mediator</build_depend>
+  <build_depend>pose2d</build_depend>
+  <build_depend>speed_decision</build_depend>
+  <!-- <build_depend>cvte_sensor_msgs</build_depend> -->
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>planner_utils</build_depend>
+  
+  <exec_depend>costmap_base</exec_depend>
+  <exec_depend>costmap_layer</exec_depend>
+  <exec_depend>costmap_builder</exec_depend>
+  <exec_depend>perception</exec_depend>
+  <exec_depend>nav_msgs</exec_depend>
+  <exec_depend>costmap_ros2</exec_depend>
+  <exec_depend>rclcpp</exec_depend>
+  <exec_depend>costmap_mediator</exec_depend>
+  <exec_depend>pose2d</exec_depend>
+  <exec_depend>speed_decision</exec_depend>
+  <!-- <exec_depend>cvte_sensor_msgs</exec_depend> -->
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>planner_utils</exec_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+  
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
+

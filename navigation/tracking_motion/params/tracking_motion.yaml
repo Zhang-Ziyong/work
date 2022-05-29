@@ -1,0 +1,3 @@
+tracking_motion_node:
+  ros__parameters:
+    config_file: "./install/tracking_motion/params/tracking_motion.json"

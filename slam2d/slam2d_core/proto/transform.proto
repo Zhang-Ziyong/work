@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package slam2d.mapping.proto;
+
+
+message Vector2d {
+  double x = 1;
+  double y = 2;
+}
+
+message Vector3d {
+  double x = 1;
+  double y = 2;
+  double z = 3;
+}
+
+message Quaterniond {
+  double x = 1;
+  double y = 2;
+  double z = 3;
+  double w = 4;
+}
+
+message Rigid2 {
+  Vector2d translation = 1;
+  double rotation = 2;
+}
+
+message Rigid3 {
+  Vector3d translation = 1;
+  Quaterniond rotation = 2;
+}

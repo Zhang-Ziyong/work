@@ -1,0 +1,17 @@
+syntax = "proto2";
+
+package cvte.hdmap;
+
+import "map_id.proto";
+import "map_geometry.proto";
+
+message SpeedBump {
+  optional Id id = 1;
+  optional Polygon polygon = 2;
+  optional double speed = 3;
+  optional string material = 4;
+  optional string color = 5;
+  optional string static_area = 6;
+  repeated Id overlap_id = 7;
+  repeated Curve position = 8;
+}

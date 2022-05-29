@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>full_coverage_planner_ros2</name>
+  <version>1.0.0</version>
+  <description>A full coverage planner for clean robot</description>
+  <maintainer email="zhangwei@cvte.com">zhangwei</maintainer>
+  <license>TODO: License declaration</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>full_coverage_planner</depend>
+  <depend>mission_manager_msgs</depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
+
