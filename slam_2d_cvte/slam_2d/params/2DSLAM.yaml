@@ -1,0 +1,184 @@
+lidar_slam_mission_manager:
+    ros__parameters:
+        t_lo: [1.0, 0.0, 0.0, -0.48, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+       
+        print_debug: false
+        is_debug: false
+        publish_tf: true
+        publish_cloud: true
+        publish_global_cloud: true
+        publish_path: true
+        publish_cloud_loc: false
+        publish_global_cloud_loc: false
+        
+        depth_camera_front_up_topic: "/obstacle_cloud_front_up"
+        depth_camera_front_down_topic: "/obstacle_cloud_front_down"
+        step_depth_camera_front_up_topic: "/steps_cloud_front_up"
+        step_depth_camera_front_down_topic: "/steps_cloud_front_down"
+        use_depth_camera: false
+        use_imu: false
+
+        open_sensor_statu_pub: true
+        sensor_statu_pub_delay: 60
+        
+        lidar_topic_name: "/scan"         # /velodyne_points  /rslidar_points
+        wheel_odom_topic_name: "/odom"    # /mini_bot /robot_fusion_odom
+        imu_topic_name: "/spatial_imu"    # /lpms_imu /spatial_imu  /livox/imu_1HDDGBM00101121
+        depthcloud_sample_frequent: 0.05  # depth frequent 20Hz 
+        
+        map_path: "/home/suyun/map_data"
+
+        feature_config:
+            lidar_type: "2D"  #eg: "horizon" , "velodyne"
+            min_feature_points: 40
+            narrow_candidate: 2.0
+            narrow_region: 1.5
+            narrow_ratio: 0.8
+            small_cluster_size: 0.1
+           
+            edge_size: 0.1
+            surf_size: 0.1
+
+            calculate_degenerate: true
+        
+        loop_config:
+            # key frame that is within n meters from current pose will be considerd for loop closure
+            loop_search_radius: 6.0
+
+            # 2n+1 number of hostory key frames will be fused into a submap for loop closure
+            history_search_num: 40
+            last_keyframe_size: 30 #用最后几帧合并进行icp
+
+            loop_icp_score: 0.15
+
+            time_diff: 40
+            id_diff: 40
+
+            max_loop_angle: 3.14 # 闭环相对角度 0.628
+
+            history_cloud_ds_size: 0.1
+
+            relocalization_icp_score: 0.15
+
+           # key frame that is within n meters from current pose will be considerd for relocalization
+            relocalization_search_radius: 10.0
+
+            loop_relative_pose: 3.0
+
+            relocalization_box_size_x: 2
+            relocalization_box_size_y: 2
+            relocalization_box_size_yaw: 2
+
+            icp_fitness_score: 2.0
+
+            loop_track_count: 8
+
+            opt_update_map_time: 20.0
+        
+        backend_config:
+            is_localization_mode: true
+            # key frame that is within n meters from current pose will be considerd for scan-to-map optimization 
+            surround_search_radius: 10.0
+            # submap size of history key frames 
+            surround_search_num: 150
+
+            leaf_size: 0.5  #临域子图分辨率
+            edge_size: 0.1
+            surf_size: 0.1
+
+            trans_threshold: 0.35 #轮式里程计帧创建平移判断阈值(m) 0.35
+            angle_threshold: 0.4 #帧创建旋转判断阈值(rad) 0.4 0.8
+            time_threshold: 60.0 #帧创建时间阈值 0.5 1.0
+
+            is_search_by_time: true  # 按时间搜索
+            min_distance: 0.3 #关键帧移动阈值 0.3 0.6
+
+            match_algorithm: 3 #匹配算法： 1-PCL，2-ceres
+            max_match_dis: 0.3
+
+            max_map_match_success_score: 0.06
+            min_map_match_overlap_ratio: 0.3
+
+            fusion_pose_smooth_ratio: 0.01
+            lidar_odom_smooth_ratio: 1.0
+
+            odom_match_ratio: 1.0
+            mapping_match_smooth_ratio: 1.0
+
+            loc_match_smooth_ratio: 1.0
+            lidar_odom_match_smooth_ratio: 1.0
+
+            loop_cov: 0.2
+            relative_cov: 0.02
+
+            angular_threshold: 0.3 #帧创建角速度阈值 0.1 0.3
+
+            use_ceres_opt: true
+
+            max_match_failed: 100  #地图匹配失败的次数
+
+            max_low_overlap: 100  #点云重叠率低的最大次数
+            
+            save_keyPose_to_file: false #判断是否生成txt文件
+
+            map_update: false     
+            increase_ratio: 0.8  # 概率增长强度
+            decrease_ratio: 1.0  # 概率衰减强度
+            increase_duration: 600.0   # 概率增长最大时间间隔 600
+            decrease_duration: 1200.0  # 概率衰减最小时间间隔 3600
+            static_duration: 200.0  # 静止状态最小时间间隔 200
+            init_map_prob: 60.0     # 初始概率 60
+            min_match_prob: 40.0  # 最小匹配概率 50
+            new_add_prob: 30.0    # 新增概率 40
+            min_erase_prob: 20.0  # 最小擦除概率 30
+            
+            degenerate_threshold: 100.0   #退化判断的阈值
+            degenerate_lidar_odom_smooth_ratio: 0.05
+            degenerate_loc_match_smooth_ratio: 0.1
+
+        msf_config:
+            fix_first_node: true
+            new_node_size_to_opt: 1
+            opt_windows_size: 10
+            opt_loop_count: 1
+
+        occupancy_map:
+            laser_min_angle: -3.14159
+            laser_max_angle: 3.14159
+            laser_min_range: 0.3
+            laser_max_range: 20.0
+            laser_angle_increment: 0.00175312
+            use_view_cloud: true
+            point_size: 0.05
+            local_map_size: 20
+            local_map_resolution: 0.1
+            dynamic_cloud_remove: false
+
+        depth_occupancy_map:
+            do_calibration: true
+            read_from_params_system: false
+            front_up_transform_name: external_parameter.T_base_camera_front_up
+            front_down_transform_name: external_parameter.T_base_camera_front_down
+            front_up_transform :  [0.0102134, -0.315248, 0.948954, 0.42435, -0.999943, -0.00623769, 0.00868995, 0.0386476, 0.0031798, -0.948989, -0.315294, 0.82303, 0.0, 0.0, 0.0, 1.0]
+            front_down_transform: [-0.018574, 0.0110498, 0.999766, 0.619565, 0.999828, 0.000264998, 0.0185722, -0.0429056, -5.97175e-05, 0.999939, -0.0110528, 0.10, 0.0, 0.0, 0.0, 1.0]
+            
+            depth_dist_value: 2.0
+            depth_seg_ratio: 0.7
+            
+            search_area_point: [0.05, -0.03, 2.0, -1.0, 0.05, 0.03, 2.0, 1.0]
+            add_bel_value: 0.4
+            reduce_bel_value: 0.18
+            max_bel_value: 2.0
+            
+            v_limit: 0.01 #低于此速度才添加障碍物
+            w_limit: 0.01 #低于此速度才添加障碍物
+            
+            high_filter_value: 0.03
+
+            laser_min_angle: -0.5654862
+            laser_max_angle: 0.5654862
+            laser_min_range: 0.05
+            laser_max_range: 10.0
+            laser_angle_increment: 0.007065
+            use_view_cloud: true
+
